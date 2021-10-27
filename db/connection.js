@@ -6,7 +6,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Moxie2020!',
-    database: 'employees'
+    database: 'employeesTracker'
 
 });
 

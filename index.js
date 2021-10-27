@@ -1,6 +1,8 @@
 //Dependencies
 const inquirer = require('inquirer');
 const db = require('./db/connection')
+require('console.table');
+
 db.connect(function (err, data){
     if (err) 
     throw err
@@ -22,15 +24,15 @@ const whatToDo = () => {
     'Add a department', 'Add a role', 'Add an employee', 'Update employee role']
     })
     .then(data => {
-        switch (data.whatToDo) {
+        switch (data.init) {
             case 'View all departments':
-                nextTask();
+                viewDepartments();
                 break;
             case 'View all roles':
-                nextTask();
+                viewRole();
                 break;
             case 'View all employees':
-                nextTask();
+                viewEmployees();
                 break;
             case 'Add a department':
                 nextTask();
@@ -58,7 +60,7 @@ function nextTask() {
         choices: ['Yes', 'No']
     })
     .then(function(nextTaskData){
-        switch (nextTaskData.nextTask) {
+        switch (nextTaskData.next) {
             case 'Yes':
                 whatToDo();
                 break;
@@ -71,5 +73,28 @@ function nextTask() {
 
 
 function viewDepartments() {
-    db.query()
+    db.query('SELECT * FROM department', function(err, data){
+        if (err)
+        throw err;
+        console.table(data);
+        nextTask();
+    })
+}
+
+function viewEmployees() {
+    db.query('SELECT * FROM employee', function(err, data){
+        if (err)
+        throw err;
+        console.table(data);
+        nextTask();
+    })
+}
+
+function viewRole() {
+    db.query('SELECT * FROM e_role', function(err, data){
+        if (err)
+        throw err;
+        console.table(data);
+        nextTask();
+    })
 }
