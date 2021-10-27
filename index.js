@@ -35,10 +35,10 @@ const whatToDo = () => {
                 viewEmployees();
                 break;
             case 'Add a department':
-                nextTask();
+                addDepartment();
                 break;
             case 'Add a role':
-                nextTask();
+                addRole();
                 break;
             case 'Add an employee':
                 nextTask();
@@ -66,6 +66,7 @@ function nextTask() {
                 break;
             case 'No':
                 console.log('Thank you for using the Employee Tracker!');
+                process.exit(0)
                 break;
         }
     })
@@ -96,5 +97,46 @@ function viewRole() {
         throw err;
         console.table(data);
         nextTask();
+    })
+}
+
+function addDepartment(){
+    inquirer.prompt({
+        name: 'depName',
+        type: 'text',
+        message: 'Please enter the name of the department you would like to add: '
+    })
+    .then(function(data){
+        db.query('INSERT INTO department (name) VALUES (?)', data.depName, function(err, data){
+            if (err)
+            throw err
+            nextTask();
+        })
+    })
+}
+
+function addRole(){
+    inquirer.prompt([{
+        name: 'title',
+        type: 'text',
+        message: 'Please enter the name of the role you would like to add: '
+    },
+    {
+        name: 'salary',
+        type: 'input',
+        message: 'Please enter the salary for this role: '
+    },
+    {
+        name: 'id',
+        type: 'list',
+        message: 'Please enter the id of the department: ',
+        choices: ['1', '2', '3', '4', '5']
+    }])
+    .then(function(data){
+        db.query('INSERT INTO e_role (title, salary, role_id) VALUES  (?, ?, ?)', [data.title, data.salary, data.id], function(err, data){
+            if (err)
+            throw err
+            nextTask();
+        })
     })
 }
