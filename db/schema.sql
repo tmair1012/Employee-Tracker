@@ -6,14 +6,13 @@ CREATE TABLE department(
 CREATE TABLE e_role (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
-    salary INTEGER decimal(10,2) NOT NULL,
+    salary decimal(10,2) NOT NULL,
     role_id INTEGER,
     CONSTRAINT fk_department
     FOREIGN KEY (role_id)
     REFERENCES department(id)
     ON DELETE SET NULL
-
-);
+)
 
 CREATE TABLE employee(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -21,14 +20,15 @@ CREATE TABLE employee(
     last_name VARCHAR(50) NOT NULL,
     role_id INTEGER,
     manager_id INTEGER,
-    description TEXT
+    description TEXT,
 
     CONSTRAINT fk_employee_role
     FOREIGN KEY (role_id)
-    REFERENCES e_role(id)
-    ON DELETE SET NULL,
+    REFERENCES e_role(id),
+    
 
     CONSTRAINT fk_manager
     FOREIGN KEY (manager_id)
-    REFERENCES employee.manager_id
-);
+    REFERENCES employee(id)
+    ON DELETE SET NULL
+)
