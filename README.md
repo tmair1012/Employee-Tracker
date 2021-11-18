@@ -28,3 +28,10 @@ No License
 
 ### Email:
 tyleramair@gmail.com
+
+### WalkThrough Video:
+https://www.youtube.com/watch?v=tH7IgBDtWrg
+
+### Screen Shots:
+<img width="1680" alt="Employee-Tracker-Index" src="https://user-images.githubusercontent.com/87788050/142303346-1cc56c50-d080-4004-af6c-bf6b22472bb6.png">
+<img width="1680" alt="Employee-Tracker-Schema" src="https://user-images.githubusercontent.com/87788050/142303426-3ab8fc6a-cda0-46cd-862d-a71665119e6d.png">
