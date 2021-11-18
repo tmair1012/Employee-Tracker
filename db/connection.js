@@ -1,4 +1,4 @@
-//Create a data base for mysql use
+/* mysql connection */
 
 const mysql = require('mysql2');
 

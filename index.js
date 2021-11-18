@@ -8,13 +8,9 @@ db.connect(function (err, data){
     throw err
     whatToDo();
 })
-//Create all prompt functions
 
 
-// Function to ask user if they would like to keep using the Employee Tracker or exit
-
-
-
+//function to ask the user what they would like to do, the dashboard of the app
 const whatToDo = () => {
     inquirer.prompt({
         name: 'init',
@@ -41,7 +37,7 @@ const whatToDo = () => {
                 addRole();
                 break;
             case 'Add an employee':
-                nextTask();
+                addEmployee();
                 break;
             case 'Update employee role':
                 nextTask();
@@ -51,7 +47,7 @@ const whatToDo = () => {
 };
 
 
-
+//function to prompt the user if they would like to continue
 function nextTask() {
     inquirer.prompt({
         name: 'next',
@@ -72,7 +68,7 @@ function nextTask() {
     })
 }
 
-
+//function to view all departments in mysql database
 function viewDepartments() {
     db.query('SELECT * FROM department', function(err, data){
         if (err)
@@ -81,7 +77,7 @@ function viewDepartments() {
         nextTask();
     })
 }
-
+//function to view all employees in mysql database
 function viewEmployees() {
     db.query('SELECT * FROM employee', function(err, data){
         if (err)
@@ -90,7 +86,7 @@ function viewEmployees() {
         nextTask();
     })
 }
-
+//function to grab roles from database and show in terminal
 function viewRole() {
     db.query('SELECT * FROM e_role', function(err, data){
         if (err)
@@ -99,7 +95,7 @@ function viewRole() {
         nextTask();
     })
 }
-
+//Function to add additional department to mysql database
 function addDepartment(){
     inquirer.prompt({
         name: 'depName',
@@ -115,6 +111,7 @@ function addDepartment(){
     })
 }
 
+//function to add a role to the mysql table
 function addRole(){
     inquirer.prompt([{
         name: 'title',
@@ -139,4 +136,44 @@ function addRole(){
             nextTask();
         })
     })
+}
+
+//Function to add an employee to the employee mysql table
+function addEmployee() {
+    inquirer.prompt([{
+        name: 'first_name',
+        type: 'text',
+        message: 'Please enter the first name of the employee you would like to add: '
+    },
+    {
+        name: 'last_name',
+        type: 'input',
+        message: 'Please enter the last name of the employee you would like to add: '
+    },
+    {
+        name: 'role_id',
+        type: 'list',
+        message: 'Please enter the role id of the employee: ',
+        choices: ['1', '2', '3', '4', '5'],
+    }
+    ])
+    .then(function(data){
+        db.query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?)', [data.first_name, data.last_name, data.role_id], function(err, data){
+            if (err)
+            throw err
+            nextTask();
+        });
+    });
+};
+
+//function to update one employee from the employees table
+function updateEmployee(){
+    //grab employees from TABLE
+
+   db.query(`SELECT * FROM employee`, (err, data) => {
+       if (err)
+       throw err;
+
+    
+   })
 }

@@ -1,3 +1,4 @@
+/* Initial employee values */
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
     ('Kyle', 'Comperda', 1, NULL),
@@ -9,6 +10,7 @@ VALUES
     ('John', 'Hoffman', 4, 1),
     ('Chris', 'Hong', 2, 1)
 
+/* initial department values */
 INSERT INTO department (name)
 VALUES 
 ('Sales'),
@@ -17,6 +19,7 @@ VALUES
 ('Finance'),
 ('Legal')
 
+/* initial role values */
 INSERT INTO e_role (title, salary, role_id)
 VALUES 
 ('Manager', '120000', 1),

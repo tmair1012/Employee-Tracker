@@ -1,8 +1,9 @@
+/* Departments mysql table */
 CREATE TABLE department(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL
 )
-
+/* role mysql table */
 CREATE TABLE e_role (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
@@ -14,6 +15,7 @@ CREATE TABLE e_role (
     ON DELETE SET NULL
 )
 
+/* employees mysql table */
 CREATE TABLE employee(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
